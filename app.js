@@ -1,6 +1,7 @@
 "use strict";
 
 const STORAGE_KEY = "vibe-midterm-roulette-v1";
+const TAU = Math.PI * 2;
 const PALETTE = ["#f6c945", "#55b98b", "#e96b52", "#6394da", "#ce78b1", "#b7c84b", "#ee8d36", "#36b9ba"];
 const DEFAULT_PRESETS = {
   "점심 메뉴": ["김치찌개", "돈가스", "초밥", "파스타", "국밥", "쌀국수"],
@@ -245,15 +246,18 @@ function spin() {
   let beforeWeight = 0;
   for (let index = 0; index < wheelIndex; index += 1) beforeWeight += Number(state.items[index].weight);
   const slice = (Number(winner.weight) / allWeight) * Math.PI * 2;
-  const winningCenter = beforeWeight / allWeight * Math.PI * 2 + slice / 2;
-  const normalizedRotation = ((rotation % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
-  const target = normalizedRotation + Math.PI * 2 * 6 + (Math.PI * 2 - winningCenter);
+  const landingFraction = 0.3 + Math.random() * 0.4;
+  const landingAngle = beforeWeight / allWeight * TAU + slice * landingFraction;
+  const targetRotation = ((-landingAngle % TAU) + TAU) % TAU;
+  const currentRotation = ((rotation % TAU) + TAU) % TAU;
+  const alignmentRotation = ((targetRotation - currentRotation) % TAU + TAU) % TAU;
   const start = rotation;
-  const distance = target - start;
+  const distance = TAU * 6 + alignmentRotation;
   const duration = 4300;
   const startTime = performance.now();
   spinning = true;
   spinButton.disabled = true;
+  setEditorLocked(true);
   $("#result-value").textContent = "두근두근… 결과를 기다려 주세요!";
 
   function animate(now) {
@@ -265,16 +269,23 @@ function spin() {
       requestAnimationFrame(animate);
       return;
     }
-    rotation = ((rotation % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+    rotation = ((rotation % TAU) + TAU) % TAU;
     drawWheel();
     spinning = false;
     spinButton.disabled = false;
+    setEditorLocked(false);
     $("#result-value").textContent = winner.name.trim();
     $("#result-card").classList.remove("is-winner");
     void $("#result-card").offsetWidth;
     $("#result-card").classList.add("is-winner");
   }
   requestAnimationFrame(animate);
+}
+
+function setEditorLocked(locked) {
+  $(".editor-card").querySelectorAll("button, input, select").forEach((control) => {
+    control.disabled = locked || (control.id === "delete-preset" && Object.keys(state.presets).length <= 1);
+  });
 }
 
 presetSelect.addEventListener("change", () => {
