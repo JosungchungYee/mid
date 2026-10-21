@@ -6,8 +6,8 @@
     <meta name="theme-color" content="#10130f">
     <meta name="description" content="고민되는 선택을 재미있는 룰렛으로 결정해 보세요.">
     <title>돌려돌려 룰렛</title>
-    <link rel="stylesheet" href="styles.css?v=go-led-ring">
-    <script src="app.js?v=neon-jackpot" defer></script>
+    <link rel="stylesheet" href="styles.css?v=preset-create-v1">
+    <script src="app.js?v=preset-create-v1" defer></script>
   </head>
   <body>
     <div class="page-shell">
@@ -51,9 +51,18 @@
             <label class="field-label" for="preset-select">프리셋</label>
             <div class="preset-row">
               <select id="preset-select" aria-label="프리셋 선택"></select>
-              <button class="icon-button" id="save-preset" type="button" title="현재 항목을 새 프리셋으로 저장" aria-label="현재 항목을 새 프리셋으로 저장">＋</button>
               <button class="icon-button delete-preset" id="delete-preset" type="button" title="선택한 프리셋 삭제" aria-label="선택한 프리셋 삭제">−</button>
             </div>
+            <button class="add-preset-button" id="show-preset-form" type="button">＋ 새 프리셋 추가</button>
+            <form class="new-preset-form" id="new-preset-form" hidden>
+              <label class="field-label" for="new-preset-name">새 프리셋 이름</label>
+              <div class="new-preset-row">
+                <input id="new-preset-name" type="text" maxlength="30" placeholder="예: 저녁 메뉴" required>
+                <button class="confirm-preset-button" type="submit">저장</button>
+                <button class="cancel-preset-button" id="cancel-preset" type="button">취소</button>
+              </div>
+              <p class="preset-error" id="preset-error" aria-live="polite"></p>
+            </form>
 
             <div class="list-heading">
               <span>항목 <span class="muted">(가중치 · 색상)</span></span>

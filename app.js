@@ -285,22 +285,43 @@ presetSelect.addEventListener("change", () => {
   $("#result-value").textContent = "룰렛을 돌려 결과를 확인하세요!";
 });
 
-$("#save-preset").addEventListener("click", () => {
-  const name = window.prompt("새 프리셋 이름을 입력하세요.");
-  if (name === null) return;
-  const trimmed = name.trim();
+const newPresetForm = $("#new-preset-form");
+const newPresetName = $("#new-preset-name");
+
+$("#show-preset-form").addEventListener("click", () => {
+  newPresetForm.hidden = false;
+  $("#preset-error").textContent = "";
+  newPresetName.focus();
+});
+
+$("#cancel-preset").addEventListener("click", () => {
+  newPresetForm.reset();
+  newPresetForm.hidden = true;
+  $("#preset-error").textContent = "";
+  $("#show-preset-form").focus();
+});
+
+newPresetForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const trimmed = newPresetName.value.trim();
   if (!trimmed) {
-    window.alert("프리셋 이름을 입력해 주세요.");
+    $("#preset-error").textContent = "프리셋 이름을 입력해 주세요.";
+    newPresetName.focus();
     return;
   }
   if (state.presets[trimmed]) {
-    window.alert("같은 이름의 프리셋이 이미 있어요.");
+    $("#preset-error").textContent = "같은 이름의 프리셋이 이미 있어요.";
+    newPresetName.focus();
     return;
   }
   state.selected = trimmed;
   state.presets[trimmed] = state.items.map((item) => ({ ...item }));
   renderPresets();
   persist();
+  newPresetForm.reset();
+  newPresetForm.hidden = true;
+  $("#preset-error").textContent = "";
+  $("#show-preset-form").focus();
 });
 
 $("#delete-preset").addEventListener("click", () => {
