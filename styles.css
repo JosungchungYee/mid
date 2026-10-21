@@ -156,10 +156,10 @@ h1 span { color: var(--gold); text-shadow: 0 0 9px rgba(255, 216, 77, .85), 0 0 
   width: 67px;
   height: 67px;
   transform: translate(-50%, -50%);
-  border: 0;
-  border-radius: 0;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
   background: transparent;
-  box-shadow: none;
+  box-shadow: 0 0 7px rgba(255, 216, 77, .75), 0 0 14px rgba(255, 196, 48, .25);
   color: #fffbe8;
   font-family: "Jua", sans-serif;
   font-size: 17px;
