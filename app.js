@@ -1,7 +1,7 @@
 "use strict";
 
 const STORAGE_KEY = "vibe-midterm-roulette-v1";
-const PALETTE = ["#f2bd72", "#8cb9a0", "#e9947c", "#91a9cf", "#d8a4c5", "#c8c975", "#e8a95b", "#78b6b5"];
+const PALETTE = ["#f6c945", "#55b98b", "#e96b52", "#6394da", "#ce78b1", "#b7c84b", "#ee8d36", "#36b9ba"];
 const DEFAULT_PRESETS = {
   "점심 메뉴": ["김치찌개", "돈가스", "초밥", "파스타", "국밥", "쌀국수"],
   "간식 고르기": ["붕어빵", "아이스크림", "케이크", "쿠키", "과일"],
@@ -174,7 +174,7 @@ function drawWheel() {
     context.fillStyle = "#e9ece4";
     context.fill();
     context.fillStyle = "#778078";
-    context.font = `600 ${Math.max(12, size * .045)}px "DM Sans", sans-serif`;
+    context.font = `600 ${Math.max(12, size * .045)}px "Jua", sans-serif`;
     context.textAlign = "center";
     context.textBaseline = "middle";
     context.fillText("항목을 추가해 주세요", 0, 0);
@@ -201,8 +201,10 @@ function drawWheel() {
     context.rotate(middle);
     context.translate(radius * .65, 0);
     context.rotate(Math.PI / 2);
-    context.fillStyle = "#29352f";
-    context.font = `700 ${Math.max(10, Math.min(15, size * .038))}px "Gowun Dodum", sans-serif`;
+    context.fillStyle = "#182018";
+    context.shadowColor = "rgba(255, 248, 204, .55)";
+    context.shadowBlur = 5;
+    context.font = `700 ${Math.max(10, Math.min(16, size * .04))}px "Jua", sans-serif`;
     context.textAlign = "center";
     context.textBaseline = "middle";
     const label = item.name.trim() || "항목";
