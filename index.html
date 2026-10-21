@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f3ed">
+    <meta name="description" content="고민되는 선택을 재미있는 룰렛으로 결정해 보세요.">
+    <title>돌려돌려 룰렛</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="#" aria-label="돌려돌려 룰렛 홈">
+          <span class="brand-icon" aria-hidden="true">✳</span>
+          <span>돌려돌려 <strong>룰렛</strong></span>
+        </a>
+        <span class="header-note">오늘의 선택, 룰렛에 맡겨봐요</span>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <p class="eyebrow">A LITTLE SPIN, A BIG DECISION</p>
+          <h1 id="page-title">고민은 잠깐,<br class="mobile-break"> 선택은 <span>시원하게!</span></h1>
+          <p class="intro-copy">후보를 적고 룰렛을 돌려 보세요.<br>오늘의 선택을 재미있게 정해 드릴게요.</p>
+        </section>
+
+        <section class="roulette-layout" aria-label="룰렛과 항목 편집">
+          <div class="wheel-column">
+            <div class="wheel-wrap">
+              <div class="pointer" aria-hidden="true"></div>
+              <canvas id="wheel" aria-label="입력한 항목으로 구성된 룰렛">룰렛을 표시할 수 없는 브라우저입니다.</canvas>
+              <div class="wheel-hub" aria-hidden="true"><span>GO!</span></div>
+            </div>
+            <button class="spin-button" id="spin-button" type="button">
+              <span aria-hidden="true">✦</span> 룰렛 돌리기
+            </button>
+            <p class="spin-hint">운명에 맡겨보세요!</p>
+          </div>
+
+          <div class="editor-card">
+            <div class="card-heading">
+              <div>
+                <p class="eyebrow">YOUR CHOICES</p>
+                <h2>무엇을 고를까요?</h2>
+              </div>
+              <span class="item-count" id="item-count">0개</span>
+            </div>
+
+            <label class="field-label" for="preset-select">프리셋</label>
+            <div class="preset-row">
+              <select id="preset-select" aria-label="프리셋 선택"></select>
+              <button class="icon-button" id="save-preset" type="button" title="현재 항목을 새 프리셋으로 저장" aria-label="현재 항목을 새 프리셋으로 저장">＋</button>
+              <button class="icon-button delete-preset" id="delete-preset" type="button" title="선택한 프리셋 삭제" aria-label="선택한 프리셋 삭제">−</button>
+            </div>
+
+            <div class="list-heading">
+              <span>항목 <span class="muted">(가중치 · 색상)</span></span>
+              <span class="muted">삭제</span>
+            </div>
+            <div class="item-list" id="item-list" aria-label="룰렛 항목 목록"></div>
+
+            <button class="add-item-button" id="add-item" type="button">
+              <span aria-hidden="true">＋</span> 항목 추가하기
+            </button>
+            <p class="editor-note">가중치가 높을수록 당첨 확률이 올라가요.</p>
+          </div>
+        </section>
+
+        <section class="result-card" id="result-card" aria-live="polite" aria-atomic="true">
+          <span class="result-sparkle" aria-hidden="true">✦</span>
+          <div>
+            <p class="result-label">오늘의 선택</p>
+            <p class="result-value" id="result-value">룰렛을 돌려 결과를 확인하세요!</p>
+          </div>
+        </section>
+
+        <p class="save-note"><span aria-hidden="true">♡</span> 항목과 프리셋은 이 기기에 자동 저장돼요.</p>
+      </main>
+
+      <footer class="site-footer">
+        <span>상경학부</span><span aria-hidden="true">·</span>
+        <span>202602243</span><span aria-hidden="true">·</span>
+        <span>황예준</span>
+      </footer>
+    </div>
+  </body>
+</html>
